@@ -8,7 +8,10 @@
     "build": "tsc -b && vite build",
     "lint": "oxlint",
     "preview": "vite preview",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "sb:config": "dotenvx run -f supabase/.env -fk .env.keys -- supabase config push",
+    "sb:secrets": "dotenvx decrypt -f supabase/functions/.env -fk .env.keys --stdout | supabase secrets set --env-file /dev/stdin",
+    "sb:env": "npm run sb:config && npm run sb:secrets"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.118.0",
