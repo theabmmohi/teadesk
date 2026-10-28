@@ -4,7 +4,8 @@
   "compilerOptions": {
     "paths": {
       "@/*": ["./src/*"],
-      "@util/*": ["./src/utils/*"]
+      "@util/*": ["./src/utils/*"],
+      "@router/*": ["./src/router/*"]
     }
   }
 }
