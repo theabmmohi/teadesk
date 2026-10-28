@@ -1,3 +1,6 @@
+import { useRouteError } from "react-router"
+
 export function ErrorBoundary() {
-  return <p>Error</p>
+  const error = useRouteError()
+  return <pre>{JSON.stringify(error, null, 2)}</pre>
 }

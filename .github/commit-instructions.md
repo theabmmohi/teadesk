@@ -10,6 +10,7 @@ Format: <type>(<scope>): <summary>
 - Keep migrations (supabase/migrations) in the db scope
 
 Examples:
+
 - feat(db): add students and batches tables
 - fix(auth): use 127.0.0.1:5173 as local site_url
 - chore: add dotenvx scripts for supabase config and secrets
