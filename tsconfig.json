@@ -5,7 +5,8 @@
     "paths": {
       "@/*": ["./src/*"],
       "@util/*": ["./src/utils/*"],
-      "@router/*": ["./src/router/*"]
+      "@router/*": ["./src/router/*"],
+      "@page/*": ["./src/pages/*"]
     }
   }
 }
