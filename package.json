@@ -9,9 +9,10 @@
     "lint": "oxlint",
     "preview": "vite preview",
     "format": "prettier --write .",
-    "sb:config": "dotenvx run -f supabase/.env -fk .env.keys -- supabase config push",
-    "sb:secrets": "dotenvx decrypt -f supabase/functions/.env -fk .env.keys --stdout | supabase secrets set --env-file /dev/stdin",
-    "sb:all": "npm run sb:config && npm run sb:secrets"
+    "sb:config:diff": "dotenvx run -f supabase/.env -fk .env.keys -- supabase config diff",
+    "sb:config:push": "dotenvx run -f supabase/.env -fk .env.keys -- supabase config push",
+    "sb:config:pull": "dotenvx run -f supabase/.env -fk .env.keys -- supabase config pull",
+    "sb:secrets:set": "dotenvx decrypt -f supabase/functions/.env -fk .env.keys --stdout | supabase secrets set --env-file /dev/stdin"
   },
   "dependencies": {
     "@base-ui/react": "^1.9.0",
