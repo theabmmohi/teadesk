@@ -4,9 +4,10 @@
   "compilerOptions": {
     "paths": {
       "@/*": ["./src/*"],
-      "@util/*": ["./src/utils/*"],
+      "@ui/*": ["./src/components/ui/*"],
+      "@page/*": ["./src/pages/*"],
       "@router/*": ["./src/router/*"],
-      "@page/*": ["./src/pages/*"]
+      "@util/*": ["./src/utils/*"]
     }
   }
 }
