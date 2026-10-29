@@ -7,6 +7,7 @@ import { ErrorBoundary } from "@router/ErrorBoundary"
 import { supabase } from "@util/supabase"
 import { Layout } from "@router/Layout"
 import { routes } from "@router/routes"
+import { useAuth } from "@util/auth"
 import "@util/listeners"
 import "@/main.css"
 
@@ -21,8 +22,8 @@ const router = createBrowserRouter([
       const {
         data: { user }
       } = await supabase.auth.getUser()
-      console.log({ user })
-      return { user }
+      useAuth.setState({ user })
+      return null
     }
   }
 ])
