@@ -4,16 +4,26 @@ import { StrictMode } from "react"
 
 import { HydrateFallback } from "@router/HydrateFallback"
 import { ErrorBoundary } from "@router/ErrorBoundary"
+import { supabase } from "@util/supabase"
 import { Layout } from "@router/Layout"
 import { routes } from "@router/routes"
+import "@util/listeners"
 import "@/main.css"
 
 const router = createBrowserRouter([
   {
+    id: "teadesk",
     element: <Layout />,
     children: routes,
     HydrateFallback,
-    ErrorBoundary
+    ErrorBoundary,
+    loader: async () => {
+      const {
+        data: { user }
+      } = await supabase.auth.getUser()
+      console.log({ user })
+      return { user }
+    }
   }
 ])
 
