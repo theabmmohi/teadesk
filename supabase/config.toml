@@ -244,6 +244,10 @@ pass = "env(SMTP_PASS)"
 admin_email = "env(SMTP_ADMIN_EMAIL)"
 sender_name = "env(SMTP_SENDER_NAME)"
 
+[auth.email.template.confirmation]
+subject = "Confirm your email address"
+content_path = "./supabase/templates/confirmation.html"
+
 # Uncomment to customize email template
 # [auth.email.template.invite]
 # subject = "You have been invited"
