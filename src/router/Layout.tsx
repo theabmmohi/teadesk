@@ -1,12 +1,13 @@
 import { SidebarProvider, SidebarInset, SidebarTrigger } from "@ui/sidebar"
 import { Avatar, AvatarImage, AvatarFallback } from "@ui/avatar"
 import { AppsSidebar } from "@/components/AppSidebar"
-import { Outlet } from "react-router"
+import { Outlet, Link } from "react-router"
+import { buttonVariants } from "@ui/button"
 import { useAuth } from "@util/auth"
-import {Button} from "@ui/button"
 
 export function Layout() {
   const { user } = useAuth.getState()
+
   return (
     <SidebarProvider>
       <AppsSidebar />
@@ -22,8 +23,12 @@ export function Layout() {
               </Avatar>
             ) : (
               <>
-                <Button variant="ghost">Register</Button>
-                <Button>Login</Button>
+                <Link to="/register" className={buttonVariants({ variant: "outline" })}>
+                  Register
+                </Link>
+                <Link to="/login" className={buttonVariants()}>
+                  Login
+                </Link>
               </>
             )}
           </div>
