@@ -19,18 +19,9 @@ const router = createBrowserRouter([
     HydrateFallback,
     ErrorBoundary,
     loader: async () => {
-      const {
-        data: { user },
-        error
-      } = await supabase.auth.getUser()
-
-      if (error?.name === "AuthRetryableFetchError") {
-        const {
-          data: { session }
-        } = await supabase.auth.getSession()
-        useAuth.setState({ user: session?.user ?? null })
-      } else useAuth.setState({ user })
-
+      const { setState } = useAuth
+      const { data } = await supabase.auth.getUser()
+      setState({ user: data.user })
       return null
     }
   }
