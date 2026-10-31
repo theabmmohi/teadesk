@@ -12,7 +12,8 @@
     "config:diff": "dotenvx run -f supabase/.env -fk .env.keys -- supabase config diff",
     "config:push": "dotenvx run -f supabase/.env -fk .env.keys -- supabase config push",
     "config:pull": "dotenvx run -f supabase/.env -fk .env.keys -- supabase config pull",
-    "secrets:set": "dotenvx decrypt -f supabase/functions/.env -fk .env.keys --stdout | supabase secrets set --env-file /dev/stdin"
+    "secrets:set": "dotenvx decrypt -f supabase/functions/.env -fk .env.keys --stdout | supabase secrets set --env-file /dev/stdin",
+    "build:email": "mkdir -p supabase/templates/dist && npx mjml supabase/templates/*.mjml -o supabase/templates/dist"
   },
   "dependencies": {
     "@base-ui/react": "^1.9.0",

@@ -246,7 +246,7 @@ sender_name = "env(SMTP_SENDER_NAME)"
 
 [auth.email.template.confirmation]
 subject = "Confirm your email address"
-content_path = "./supabase/templates/confirmation.html"
+content_path = "./supabase/templates/dist/confirmation.html"
 
 # Uncomment to customize email template
 # [auth.email.template.invite]
