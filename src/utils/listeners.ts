@@ -1,17 +1,20 @@
+import { useAuth, setUser } from "@util/auth"
 import { supabase } from "@util/supabase"
-import { auth } from "@util/store"
 
 supabase.auth.onAuthStateChange((event, session) => {
   console.log({ event, session })
-  const { setState } = auth
+  const user = session?.user ?? null
 
   switch (event) {
-    case "USER_UPDATED":
     case "SIGNED_IN":
-      setState({ user: session?.user ?? null })
+      if (user?.id === useAuth.getState().user?.id) useAuth.setState({ user })
+      else setTimeout(() => setUser(user).catch(console.error), 0)
+      break
+    case "USER_UPDATED":
+      useAuth.setState({ user })
       break
     case "SIGNED_OUT":
-      setState({ user: null })
+      setUser(null)
       break
     // case "INITIAL_SESSION":
     // case "PASSWORD_RECOVERY":

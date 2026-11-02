@@ -6,7 +6,7 @@ import { Link, Navigate, useNavigate } from "react-router"
 import { PasswordRules } from "@component/PasswordRules"
 import { isPasswordValid } from "@util/password"
 import { supabase } from "@/utils/supabase"
-import { auth } from "@/utils/store"
+import { useAuth } from "@/utils/auth"
 import { Button } from "@ui/button"
 import { Input } from "@ui/input"
 import { useState } from "react"
@@ -31,7 +31,7 @@ export function Component() {
     setRegistering(false)
   }
 
-  if (auth.getState().user) return <Navigate to="/" replace />
+  if (useAuth.getState().user) return <Navigate to="/" replace />
 
   return (
     <Card className="max-w-sm m-auto">

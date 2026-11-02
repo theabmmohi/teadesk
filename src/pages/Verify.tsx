@@ -2,11 +2,11 @@ import type { EmailOtpType } from "@supabase/supabase-js"
 import type { SubmitEvent } from "react"
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@ui/card"
-import { useEffect, useState } from "react"
 import { OTPInput, REGEXP_ONLY_DIGITS } from "input-otp"
 import { useLocation, useNavigate } from "react-router"
 import { Field, FieldLabel } from "@ui/field"
 import { RefreshCwIcon } from "lucide-react"
+import { useEffect, useState } from "react"
 import { supabase } from "@/utils/supabase"
 import { Button } from "@ui/button"
 import { Slot } from "@ui/otp-slot"
@@ -51,7 +51,7 @@ export function Component() {
     const { error } = await supabase.auth.resend({ type: "signup", email })
     if (error) toast.error(error.message)
     else {
-      toast.success("A new code was sent")
+      toast.success(`A new code was sent to ${email}`)
       setCooldown(RESEND_COOLDOWN)
     }
     setResending(false)
