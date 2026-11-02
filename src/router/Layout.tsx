@@ -1,10 +1,10 @@
 import { SidebarProvider, SidebarInset, SidebarTrigger } from "@ui/sidebar"
 import { Avatar, AvatarImage, AvatarFallback } from "@ui/avatar"
 import { AppsSidebar } from "@/components/AppSidebar"
+import { Toaster } from "@component/Toaster"
 import { Outlet, Link } from "react-router"
 import { buttonVariants } from "@ui/button"
 import { useAuth } from "@/utils/auth"
-import { Toaster } from "sonner"
 
 export function Layout() {
   const user = useAuth((s) => s.user)
@@ -40,7 +40,7 @@ export function Layout() {
           <Outlet />
         </main>
       </SidebarInset>
-      <Toaster swipeDirections={["top", "right", "bottom", "left"]} className="select-none" />
+      <Toaster />
     </SidebarProvider>
   )
 }
