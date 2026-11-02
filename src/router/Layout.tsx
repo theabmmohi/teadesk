@@ -3,11 +3,11 @@ import { Avatar, AvatarImage, AvatarFallback } from "@ui/avatar"
 import { AppsSidebar } from "@/components/AppSidebar"
 import { Outlet, Link } from "react-router"
 import { buttonVariants } from "@ui/button"
-import { useAuth } from "@util/auth"
+import { auth } from "@util/store"
 import { Toaster } from "sonner"
 
 export function Layout() {
-  const user = useAuth(s => s.user)
+  const user = auth(s => s.user)
 
   return (
     <SidebarProvider>

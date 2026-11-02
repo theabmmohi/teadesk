@@ -3,7 +3,7 @@ import { Card, CardHeader, CardTitle, CardContent, CardDescription } from "@ui/c
 import { Link, Navigate, useNavigate } from "react-router"
 import { useState, type SubmitEvent } from "react"
 import { supabase } from "@/utils/supabase"
-import { useAuth } from "@/utils/auth"
+import { auth } from "@/utils/store"
 import { Button } from "@ui/button"
 import { Input } from "@ui/input"
 import { toast } from "sonner"
@@ -26,7 +26,7 @@ export function Component() {
     setLoggingIn(false)
   }
 
-  if (useAuth.getState().user) return <Navigate to="/" replace />
+  if (auth.getState().user) return <Navigate to="/" replace />
 
   return (
     <Card className="max-w-sm m-auto">

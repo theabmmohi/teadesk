@@ -1,9 +1,9 @@
 import { supabase } from "@util/supabase"
-import { useAuth } from "@util/auth"
+import { auth } from "@util/store"
 
 supabase.auth.onAuthStateChange((event, session) => {
   console.log({ event, session })
-  const { setState } = useAuth
+  const { setState } = auth
 
   switch (event) {
     case "USER_UPDATED":

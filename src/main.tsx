@@ -7,7 +7,7 @@ import { ErrorBoundary } from "@router/ErrorBoundary"
 import { supabase } from "@util/supabase"
 import { Layout } from "@router/Layout"
 import { routes } from "@router/routes"
-import { useAuth } from "@util/auth"
+import { auth } from "@util/store"
 import "@util/listeners"
 import "@/main.css"
 
@@ -19,7 +19,7 @@ const router = createBrowserRouter([
     HydrateFallback,
     ErrorBoundary,
     loader: async () => {
-      const { setState } = useAuth
+      const { setState } = auth
       const { data } = await supabase.auth.getUser()
       setState({ user: data.user })
       console.log("Im loader !")

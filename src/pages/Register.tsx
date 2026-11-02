@@ -5,7 +5,7 @@ import { PasswordRules } from "@component/PasswordRules"
 import { useState, type SubmitEvent } from "react"
 import { isPasswordValid } from "@util/password"
 import { supabase } from "@/utils/supabase"
-import { useAuth } from "@/utils/auth"
+import { auth } from "@/utils/store"
 import { Button } from "@ui/button"
 import { Input } from "@ui/input"
 import { toast } from "sonner"
@@ -29,7 +29,7 @@ export function Component() {
     setRegistering(false)
   }
 
-  if (useAuth.getState().user) return <Navigate to="/" replace />
+  if (auth.getState().user) return <Navigate to="/" replace />
 
   return (
     <Card className="max-w-sm m-auto">
