@@ -4,11 +4,11 @@ create type public.account_type as enum ('mentor', 'learner');
 
 create table public.profiles (
   id         uuid primary key references auth.users (id) on delete cascade,
-  name       text not null check (char_length(name) between 1 and 60),
+  name       text not null check (char_length(name) between 1 and 50),
   type       public.account_type not null,
-  phone      text check (char_length(phone) <= 20),
-  dob        date,
-  address    text check (char_length(address) <= 300),
+  phone      text not null check (char_length(phone) <= 25),
+  dob        date not null,
+  address    text not null check (char_length(address) <= 250),
   note       text check (char_length(note) <= 500),
   created_at timestamptz not null default now()
 );
