@@ -1,6 +1,8 @@
+import type { EmailOtpType } from "@supabase/supabase-js"
+import type { SubmitEvent } from "react"
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@ui/card"
-import { useEffect, useState, type SubmitEvent } from "react"
-import { type EmailOtpType } from "@supabase/supabase-js"
+import { useEffect, useState } from "react"
 import { OTPInput, REGEXP_ONLY_DIGITS } from "input-otp"
 import { useLocation, useNavigate } from "react-router"
 import { Field, FieldLabel } from "@ui/field"

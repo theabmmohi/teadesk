@@ -1,13 +1,15 @@
+import type { SubmitEvent } from "react"
+
 import { Field, FieldGroup, FieldLabel, FieldDescription, FieldSeparator } from "@ui/field"
 import { Card, CardHeader, CardTitle, CardContent, CardDescription } from "@ui/card"
 import { Link, Navigate, useNavigate } from "react-router"
 import { PasswordRules } from "@component/PasswordRules"
-import { useState, type SubmitEvent } from "react"
 import { isPasswordValid } from "@util/password"
 import { supabase } from "@/utils/supabase"
 import { auth } from "@/utils/store"
 import { Button } from "@ui/button"
 import { Input } from "@ui/input"
+import { useState } from "react"
 import { toast } from "sonner"
 
 import Google from "@thesvg/react/google"
