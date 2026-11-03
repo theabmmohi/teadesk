@@ -1,5 +1,4 @@
 import type { EmailOtpType } from "@supabase/supabase-js"
-import type { SubmitEvent } from "react"
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@ui/card"
 import { OTPInput, REGEXP_ONLY_DIGITS } from "input-otp"
@@ -19,15 +18,9 @@ export function Component() {
   const { state } = useLocation() as { state: { email: string; type: EmailOtpType; title: string; description: string } | null }
 
   const [code, setCode] = useState("")
+  const [cooldown, setCooldown] = useState(0)
   const [verifying, setVerifying] = useState(false)
   const [resending, setResending] = useState(false)
-  const [cooldown, setCooldown] = useState(0)
-
-  useEffect(() => {
-    if (cooldown <= 0) return
-    const timer = setTimeout(() => setCooldown((seconds) => seconds - 1), 1000)
-    return () => clearTimeout(timer)
-  }, [cooldown])
 
   if (!state?.email || !state.type) return <h1>Invalid session !</h1>
   const { email, type } = state
@@ -42,8 +35,7 @@ export function Component() {
       setVerifying(false)
       return
     }
-    if (type === "signup") navigate("/onboard", { replace: true })
-    else navigate("/", { replace: true })
+    navigate("/", { replace: true })
   }
 
   async function resend() {
@@ -57,10 +49,11 @@ export function Component() {
     setResending(false)
   }
 
-  const submit = (event: SubmitEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    verify(code)
-  }
+  useEffect(() => {
+    if (cooldown <= 0) return
+    const timer = setTimeout(() => setCooldown((seconds) => seconds - 1), 1000)
+    return () => clearTimeout(timer)
+  }, [cooldown])
 
   return (
     <Card className="max-w-sm m-auto">
@@ -69,40 +62,33 @@ export function Component() {
         <CardDescription>{state.description}</CardDescription>
       </CardHeader>
       <CardContent>
-        <form onSubmit={submit}>
-          <div className="flex items-center justify-between">
-            <FieldLabel htmlFor="otp-verification">Verification code</FieldLabel>
-            <Button type="button" variant="outline" size="xs" processing={resending} disabled={cooldown > 0} onClick={resend}>
-              <RefreshCwIcon />
-              {cooldown > 0 ? `Resend in ${cooldown}s` : "Resend Code"}
-            </Button>
-          </div>
-          <Field className="py-5">
-            <OTPInput
-              id="otp-verification"
-              autoFocus
-              maxLength={6}
-              value={code}
-              onChange={setCode}
-              onComplete={verify}
-              disabled={verifying}
-              pattern={REGEXP_ONLY_DIGITS}
-              containerClassName="group flex items-center justify-center has-[:disabled]:opacity-40"
-              render={({ slots }) => (
-                <div className="flex">
-                  {slots.map((slot, idx) => (
-                    <Slot key={idx} {...slot} />
-                  ))}
-                </div>
-              )}
-            />
-          </Field>
-          <Field>
-            <Button type="submit" processing={verifying}>
-              Verify
-            </Button>
-          </Field>
-        </form>
+        <div className="flex items-center justify-between">
+          <FieldLabel htmlFor="otp-verification">Verification code</FieldLabel>
+          <Button type="button" variant="outline" size="xs" processing={resending} disabled={cooldown > 0} onClick={resend}>
+            <RefreshCwIcon />
+            {cooldown > 0 ? `Resend in ${cooldown}s` : "Resend Code"}
+          </Button>
+        </div>
+        <Field className="py-5">
+          <OTPInput
+            id="otp-verification"
+            autoFocus
+            maxLength={6}
+            value={code}
+            onChange={setCode}
+            onComplete={verify}
+            disabled={verifying}
+            pattern={REGEXP_ONLY_DIGITS}
+            containerClassName="group flex items-center justify-center has-[:disabled]:opacity-40"
+            render={({ slots }) => (
+              <div className="flex">
+                {slots.map((slot, idx) => (
+                  <Slot key={idx} {...slot} />
+                ))}
+              </div>
+            )}
+          />
+        </Field>
       </CardContent>
     </Card>
   )

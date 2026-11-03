@@ -13,7 +13,7 @@ export function Layout() {
     <SidebarProvider>
       <AppsSidebar />
       <SidebarInset>
-        <header className="flex items-center border-b sticky top-0 bg-background p-2 select-none">
+        <header className="flex items-center border-b sticky top-0 bg-background p-2.5 select-none">
           <SidebarTrigger />
           <Link to="/" className="font-mono">
             {import.meta.env.VITE_APP_NAME}
