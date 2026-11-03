@@ -8,6 +8,7 @@ import { useAuth } from "@/utils/auth"
 
 export function Layout() {
   const user = useAuth((s) => s.user)
+  const profile = useAuth((s) => s.profile)
 
   return (
     <SidebarProvider>
@@ -15,14 +16,19 @@ export function Layout() {
       <SidebarInset>
         <header className={`flex items-center border-b sticky top-0 bg-background select-none ${user ? "p-2.5" : "p-2"}`}>
           <SidebarTrigger />
-          <Link to="/" className="font-mono">
-            {import.meta.env.VITE_APP_NAME}
-          </Link>
           <div className="flex justify-end flex-1 gap-2.5">
             {user ? (
               <Avatar>
-                <AvatarImage />
-                <AvatarFallback>O</AvatarFallback>
+                <AvatarImage src="" alt="" />
+                <AvatarFallback>
+                  {profile?.name
+                    .trim()
+                    .split(/\s+/)
+                    .map((w) => w[0])
+                    .slice(0, 2)
+                    .join("")
+                    .toUpperCase()}
+                </AvatarFallback>
               </Avatar>
             ) : (
               <>
