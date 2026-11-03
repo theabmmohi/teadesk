@@ -15,7 +15,7 @@ import { useState } from "react"
 import { toast } from "sonner"
 
 const accountTypes = [
-  { value: "learner", title:  "Learner", description: "I'm learning with a mentor" },
+  { value: "learner", title: "Learner", description: "I'm learning with a mentor" },
   { value: "mentor", title: "Mentor", description: "I run classes and keep track of my students" }
 ]
 
