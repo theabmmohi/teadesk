@@ -35,6 +35,7 @@ export async function setUser(user: User | null) {
 
 export function setProfile(profile: Profile) {
   const id = useAuth.getState().user?.id
+  if (!id) return
   if (id) cached = { id, promise: Promise.resolve(profile) }
   useAuth.setState({ profile })
 }
