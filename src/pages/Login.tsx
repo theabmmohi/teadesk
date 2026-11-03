@@ -3,8 +3,8 @@ import type { SubmitEvent } from "react"
 import { Field, FieldGroup, FieldLabel, FieldDescription, FieldSeparator } from "@ui/field"
 import { Card, CardHeader, CardTitle, CardContent, CardDescription } from "@ui/card"
 import { Link, Navigate, useNavigate } from "react-router"
-import { supabase } from "@/utils/supabase"
-import { useAuth } from "@/utils/auth"
+import { useAuth, setUser } from "@util/auth"
+import { supabase } from "@util/supabase"
 import { Button } from "@ui/button"
 import { Input } from "@ui/input"
 import { useState } from "react"
@@ -22,9 +22,10 @@ export function Component() {
   async function login(event: SubmitEvent<HTMLFormElement>) {
     event.preventDefault()
     setLoggingIn(true)
-    const { error } = await supabase.auth.signInWithPassword({ email, password })
+    const { data, error } = await supabase.auth.signInWithPassword({ email, password })
     if (error) toast.error(error.message)
-    else navigate("/", { replace: true })
+    await setUser(data.user)
+    navigate("/", { replace: true })
     setLoggingIn(false)
   }
 

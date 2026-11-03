@@ -11,6 +11,12 @@
       "rules": {
         "react/only-export-components": "off"
       }
+    },
+    {
+      "files": ["src/hooks/**"],
+      "rules": {
+        "react/set-state-in-effect": "off"
+      }
     }
   ]
 }

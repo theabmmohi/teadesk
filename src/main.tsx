@@ -19,7 +19,7 @@ const router = createBrowserRouter([
     HydrateFallback,
     ErrorBoundary,
     loader: async () => {
-      console.log("Im loader !")
+      if (import.meta.env.DEV) console.log("Im loader !")
       const { data } = await supabase.auth.getUser()
       await setUser(data.user)
       return null

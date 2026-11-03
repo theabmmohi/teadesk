@@ -2,7 +2,7 @@ import { useAuth, setUser } from "@util/auth"
 import { supabase } from "@util/supabase"
 
 supabase.auth.onAuthStateChange((event, session) => {
-  console.log({ event, session })
+  if (import.meta.env.DEV) console.log({ event, session })
   const user = session?.user ?? null
 
   switch (event) {

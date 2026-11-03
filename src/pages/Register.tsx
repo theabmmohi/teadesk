@@ -5,8 +5,8 @@ import { Card, CardHeader, CardTitle, CardContent, CardDescription } from "@ui/c
 import { Link, Navigate, useNavigate } from "react-router"
 import { PasswordRules } from "@component/PasswordRules"
 import { isPasswordValid } from "@util/password"
-import { supabase } from "@/utils/supabase"
-import { useAuth } from "@/utils/auth"
+import { supabase } from "@util/supabase"
+import { useAuth } from "@util/auth"
 import { Button } from "@ui/button"
 import { Input } from "@ui/input"
 import { useState } from "react"
@@ -27,7 +27,7 @@ export function Component() {
     setRegistering(true)
     const { error } = await supabase.auth.signUp({ email, password })
     if (error) toast.error(error.message)
-    else navigate("/verify", { state: { email, type: "email", title: "Verify your email", description: `Enter the 6-digit code sent to ${email}` } })
+    navigate("/verify", { state: { email, type: "email", title: "Verify your email", description: `Enter the 6-digit code sent to ${email}` } })
     setRegistering(false)
   }
 

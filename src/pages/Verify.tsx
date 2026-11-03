@@ -6,7 +6,8 @@ import { useLocation, useNavigate } from "react-router"
 import { Field, FieldLabel } from "@ui/field"
 import { RefreshCwIcon } from "lucide-react"
 import { useEffect, useState } from "react"
-import { supabase } from "@/utils/supabase"
+import { supabase } from "@util/supabase"
+import { setUser } from "@util/auth"
 import { Button } from "@ui/button"
 import { Slot } from "@ui/otp-slot"
 import { toast } from "sonner"
@@ -22,19 +23,26 @@ export function Component() {
   const [verifying, setVerifying] = useState(false)
   const [resending, setResending] = useState(false)
 
+  useEffect(() => {
+    if (cooldown <= 0) return
+    const timer = setTimeout(() => setCooldown((seconds) => seconds - 1), 1000)
+    return () => clearTimeout(timer)
+  }, [cooldown])
+
   if (!state?.email || !state.type) return <h1>Invalid session !</h1>
   const { email, type } = state
 
   async function verify(token: string) {
     if (verifying || token.length < 6) return
     setVerifying(true)
-    const { error } = await supabase.auth.verifyOtp({ email, token, type })
+    const { data, error } = await supabase.auth.verifyOtp({ email, token, type })
     if (error) {
       toast.error(error.message)
       setCode("")
       setVerifying(false)
       return
     }
+    await setUser(data.user)
     navigate("/", { replace: true })
   }
 
@@ -48,12 +56,6 @@ export function Component() {
     }
     setResending(false)
   }
-
-  useEffect(() => {
-    if (cooldown <= 0) return
-    const timer = setTimeout(() => setCooldown((seconds) => seconds - 1), 1000)
-    return () => clearTimeout(timer)
-  }, [cooldown])
 
   return (
     <Card className="max-w-sm m-auto">
