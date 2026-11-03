@@ -36,7 +36,7 @@ export function Layout() {
             )}
           </div>
         </header>
-        <main className="p-4">
+        <main className="p-5">
           <Outlet />
         </main>
       </SidebarInset>
