@@ -52,8 +52,8 @@ export function Component() {
       .single()
     setSaving(false)
 
-    if (error) return toast.error(error.message)
-    setProfile(data)
+    if (error) toast.error(error.message)
+    else setProfile(data)
   }
 
   if (!user) return <Navigate to="/login" replace />

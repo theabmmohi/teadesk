@@ -41,17 +41,20 @@ export function Component() {
       setCode("")
       setVerifying(false)
       return
+    } else {
+      await setUser(data.user)
+      navigate("/", { replace: true })
     }
-    await setUser(data.user)
-    navigate("/", { replace: true })
   }
 
   async function resend() {
     setResending(true)
     const { error } = await supabase.auth.resend({ type: "signup", email })
     if (error) return toast.error(error.message)
-    toast.success(`A new code was sent to ${email}`)
-    setCooldown(RESEND_COOLDOWN)
+    else {
+      toast.success(`A new code was sent to ${email}`)
+      setCooldown(RESEND_COOLDOWN)
+    }
     setResending(false)
   }
 

@@ -26,8 +26,8 @@ export function Component() {
     if (!isPasswordValid(password)) return toast.error("Password doesn't meet the requirements")
     setRegistering(true)
     const { error } = await supabase.auth.signUp({ email, password })
-    if (error) return toast.error(error.message)
-    navigate("/verify", { state: { email, type: "email", title: "Verify your email", description: `Enter the 6-digit code sent to ${email}` } })
+    if (error) toast.error(error.message)
+    else navigate("/verify", { state: { email, type: "email", title: "Verify your email", description: `Enter the 6-digit code sent to ${email}` } })
     setRegistering(false)
   }
 

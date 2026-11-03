@@ -23,9 +23,11 @@ export function Component() {
     event.preventDefault()
     setLoggingIn(true)
     const { data, error } = await supabase.auth.signInWithPassword({ email, password })
-    if (error) return toast.error(error.message)
-    await setUser(data.user)
-    navigate("/", { replace: true })
+    if (error) toast.error(error.message)
+    else {
+      await setUser(data.user)
+      navigate("/", { replace: true })
+    }
     setLoggingIn(false)
   }
 
