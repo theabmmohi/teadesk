@@ -10,6 +10,6 @@ export function Component() {
     if (profile) return <Dashboard />
     else return <Navigate to="/setup" />
   }
-  
+
   return <p>Welcome to the {import.meta.env.VITE_APP_NAME}</p>
 }
