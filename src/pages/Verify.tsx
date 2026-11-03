@@ -49,11 +49,9 @@ export function Component() {
   async function resend() {
     setResending(true)
     const { error } = await supabase.auth.resend({ type: "signup", email })
-    if (error) toast.error(error.message)
-    else {
-      toast.success(`A new code was sent to ${email}`)
-      setCooldown(RESEND_COOLDOWN)
-    }
+    if (error) return toast.error(error.message)
+    toast.success(`A new code was sent to ${email}`)
+    setCooldown(RESEND_COOLDOWN)
     setResending(false)
   }
 
