@@ -13,12 +13,12 @@ export function Layout() {
     <SidebarProvider>
       <AppsSidebar />
       <SidebarInset>
-        <header className="flex items-center border-b sticky top-0 bg-background p-2.5 select-none">
+        <header className={`flex items-center border-b sticky top-0 bg-background select-none ${user ? "p-2.5" : "p-2"}`}>
           <SidebarTrigger />
           <Link to="/" className="font-mono">
             {import.meta.env.VITE_APP_NAME}
           </Link>
-          <div className="flex justify-end flex-1">
+          <div className="flex justify-end flex-1 gap-2.5">
             {user ? (
               <Avatar>
                 <AvatarImage />
