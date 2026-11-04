@@ -1,6 +1,8 @@
 import { Sidebar, SidebarHeader, SidebarContent, SidebarFooter } from "@ui/sidebar"
+import { DropdownMenu, DropdownMenuTrigger } from "@ui/dropdown-menu"
 import { Avatar, AvatarImage, AvatarFallback } from "@ui/avatar"
 import { ChevronsUpDown } from "lucide-react"
+import { Menu } from "@component/Menu"
 import { useAuth } from "@util/auth"
 import { Button } from "@ui/button"
 import { Link } from "react-router"
@@ -20,7 +22,9 @@ export function AppsSidebar() {
         <Link to="/" className="font-mono truncate min-w-0 flex-1">
           {import.meta.env.VITE_APP_NAME}
         </Link>
-        <Badge variant="outline" className="capitalize shrink-0">{profile?.type}</Badge>
+        <Badge variant="outline" className="capitalize shrink-0">
+          {profile?.type}
+        </Badge>
       </SidebarHeader>
       <SidebarContent></SidebarContent>
       <SidebarFooter className="flex flex-row items-center gap-2 select-none border-t p-2.5">
@@ -36,15 +40,20 @@ export function AppsSidebar() {
               .toUpperCase()}
           </AvatarFallback>
         </Avatar>
-
         <div className="min-w-0 flex-1">
           <p className="truncate text-sm font-medium">{profile?.name}</p>
           <p className="truncate text-xs text-muted-foreground">{user?.email}</p>
         </div>
-
-        <Button variant="ghost" size="icon-sm" className="shrink-0">
-          <ChevronsUpDown />
-        </Button>
+        <DropdownMenu>
+          <DropdownMenuTrigger
+            render={
+              <Button variant="ghost" size="icon-sm" className="shrink-0">
+                <ChevronsUpDown />
+              </Button>
+            }
+          />
+          <Menu/>
+        </DropdownMenu>
       </SidebarFooter>
     </Sidebar>
   )
