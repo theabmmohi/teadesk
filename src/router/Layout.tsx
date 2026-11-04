@@ -14,8 +14,22 @@ export function Layout() {
     <SidebarProvider>
       {user && <AppsSidebar />}
       <SidebarInset>
-        <header className={`flex items-center border-b sticky top-0 bg-background select-none ${user ? "p-2.5" : "p-2"}`}>
-          {user && <SidebarTrigger />}
+        <header className="flex border-b sticky top-0 bg-background select-none p-2.5">
+          <div className="flex items-center gap-2.5 min-w-0">
+            {user ? (
+              <SidebarTrigger />
+            ) : (
+              <>
+                <Avatar>
+                  <AvatarImage src="/icon.png" />
+                  <AvatarFallback>TD</AvatarFallback>
+                </Avatar>
+                <Link to="/" className="font-mono truncate">
+                  {import.meta.env.VITE_APP_NAME}
+                </Link>
+              </>
+            )}
+          </div>
           <div className="flex justify-end flex-1 gap-2.5">
             {user ? (
               <Avatar>
