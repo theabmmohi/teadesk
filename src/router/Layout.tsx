@@ -12,10 +12,10 @@ export function Layout() {
 
   return (
     <SidebarProvider>
-      <AppsSidebar />
+      {user && <AppsSidebar />}
       <SidebarInset>
         <header className={`flex items-center border-b sticky top-0 bg-background select-none ${user ? "p-2.5" : "p-2"}`}>
-          <SidebarTrigger />
+          {user && <SidebarTrigger />}
           <div className="flex justify-end flex-1 gap-2.5">
             {user ? (
               <Avatar>
