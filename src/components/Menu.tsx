@@ -1,14 +1,16 @@
 import { DropdownMenuContent, DropdownMenuGroup, DropdownMenuLabel, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuRadioGroup, DropdownMenuRadioItem } from "@/components/ui/dropdown-menu"
 import { Sun, Moon, Monitor, LogOut, User, Lock } from "lucide-react"
 import { useAppearance } from "@util/appearance"
+import { useSidebar } from "@ui/sidebar"
 import { Link } from "react-router"
 
 export function Menu() {
+  const { isMobile } = useSidebar()
   const appearance = useAppearance((s) => s.appearance)
   const setAppearance = useAppearance((s) => s.setAppearance)
 
   return (
-    <DropdownMenuContent side="top" align="end" className="w-(--anchor-width)">
+    <DropdownMenuContent side="top" align="end" className={isMobile ? "" : "w-[calc(16rem-21px)]"}>
       <DropdownMenuGroup>
         <DropdownMenuLabel>Appearance</DropdownMenuLabel>
         <DropdownMenuRadioGroup defaultValue={appearance} onValueChange={setAppearance}>
