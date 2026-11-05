@@ -8,6 +8,7 @@ import { supabase } from "@util/supabase"
 import { Layout } from "@router/Layout"
 import { routes } from "@router/routes"
 import { setUser } from "@/utils/auth"
+import "@util/appearance"
 import "@util/listeners"
 import "@/main.css"
 

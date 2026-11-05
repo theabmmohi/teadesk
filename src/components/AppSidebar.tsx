@@ -52,7 +52,7 @@ export function AppsSidebar() {
               </Button>
             }
           />
-          <Menu/>
+          <Menu />
         </DropdownMenu>
       </SidebarFooter>
     </Sidebar>

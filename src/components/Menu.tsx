@@ -1,13 +1,17 @@
 import { DropdownMenuContent, DropdownMenuGroup, DropdownMenuLabel, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuRadioGroup, DropdownMenuRadioItem } from "@/components/ui/dropdown-menu"
 import { Sun, Moon, Monitor, LogOut, User, Lock } from "lucide-react"
+import { useAppearance } from "@util/appearance"
 import { Link } from "react-router"
 
 export function Menu() {
+  const appearance = useAppearance((s) => s.appearance)
+  const setAppearance = useAppearance((s) => s.setAppearance)
+
   return (
-    <DropdownMenuContent>
+    <DropdownMenuContent side="top" align="end" className="w-(--anchor-width)">
       <DropdownMenuGroup>
         <DropdownMenuLabel>Appearance</DropdownMenuLabel>
-        <DropdownMenuRadioGroup>
+        <DropdownMenuRadioGroup defaultValue={appearance} onValueChange={setAppearance}>
           <DropdownMenuRadioItem value="light">
             <Sun />
             Light

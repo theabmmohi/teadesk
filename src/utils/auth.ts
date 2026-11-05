@@ -14,7 +14,10 @@ async function fetchProfile(id: string) {
 
 export type Profile = Tables<"profiles">
 
-export const useAuth = create<{ user: User | null; profile: Profile | null }>(() => ({
+export const useAuth = create<{
+  user: User | null
+  profile: Profile | null
+}>(() => ({
   user: null,
   profile: null
 }))

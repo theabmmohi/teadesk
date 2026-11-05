@@ -4,6 +4,21 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/png" href="/icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#ffffff" />
+    <script>
+      ;(() => {
+        try {
+          if (!localStorage.getItem("appearance")) localStorage.setItem("appearance", "system")
+          const sysDark = window.matchMedia("(prefers-color-scheme: dark)").matches
+          const current = localStorage.getItem("appearance")
+          if (current === "dark" || (current === "system" && sysDark)) {
+            document.documentElement.classList.add("dark")
+            const meta = document.querySelector('meta[name="theme-color"]')
+            if (meta) meta.setAttribute("content", "#09090b")
+          }
+        } catch (___) {}
+      })()
+    </script>
     <title>TeaDesk</title>
   </head>
   <body>
