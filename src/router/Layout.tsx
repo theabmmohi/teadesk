@@ -1,5 +1,6 @@
 import { SidebarProvider, SidebarInset, SidebarTrigger } from "@ui/sidebar"
 import { Avatar, AvatarImage, AvatarFallback } from "@ui/avatar"
+import { LogoutDialog } from "@component/LogoutDialog"
 import { AppsSidebar } from "@/components/AppSidebar"
 import { Toaster } from "@component/Toaster"
 import { Outlet, Link } from "react-router"
@@ -60,6 +61,7 @@ export function Layout() {
           <Outlet />
         </main>
       </SidebarInset>
+      <LogoutDialog />
       <Toaster />
     </SidebarProvider>
   )

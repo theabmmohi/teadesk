@@ -1,6 +1,7 @@
 import { DropdownMenuContent, DropdownMenuGroup, DropdownMenuLabel, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuRadioGroup, DropdownMenuRadioItem } from "@/components/ui/dropdown-menu"
 import { Sun, Moon, Monitor, LogOut, User, Lock } from "lucide-react"
 import { useAppearance } from "@util/appearance"
+import { useLogoutDialog } from "@util/states"
 import { useSidebar } from "@ui/sidebar"
 import { Link } from "react-router"
 
@@ -8,6 +9,7 @@ export function Menu() {
   const { isMobile } = useSidebar()
   const appearance = useAppearance((s) => s.appearance)
   const setAppearance = useAppearance((s) => s.setAppearance)
+  const setLogoutDialogOpen = useLogoutDialog((s) => s.setOpen)
 
   return (
     <DropdownMenuContent side="top" align="end" className={isMobile ? "" : "w-[calc(16rem-21px)]"}>
@@ -42,7 +44,7 @@ export function Menu() {
       </DropdownMenuGroup>
       <DropdownMenuSeparator />
       <DropdownMenuGroup>
-        <DropdownMenuItem variant="destructive">
+        <DropdownMenuItem variant="destructive" onClick={() => setLogoutDialogOpen(true)}>
           <LogOut />
           Log out
         </DropdownMenuItem>
